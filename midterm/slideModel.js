@@ -51,7 +51,7 @@ var plotDefault = function(parsedData,slideNumber) {
 };
 
 var makeCluster = function(slideNumber){
-  myGroup = L.markerClusterGroup({animate: true});
+  myGroup = L.markerClusterGroup({animate: true, maxClusterRadius:50, animateAddingMarkers : true });
   _.each(markers[slideNumber],function(marker){
     myGroup.addLayer(marker);
   });
