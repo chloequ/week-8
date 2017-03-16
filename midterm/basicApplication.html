@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="import/leaflet.css" />
+    <link rel="stylesheet" href="import/Markercluster.css" />
+    <link rel="stylesheet" href="import/Markercluster.default.css" />
+    <link rel="stylesheet" href="import/style.css" />
+
+  </head>
+  <body>
+
+    <!-- Start HTML -->
+    <div id="sidebar">
+      <h2 id="slideName">Find your Aparment</h2>
+      <!-- discription  -->
+      <div id = "myDiscription0" class = "discription">
+        <p>This is a group of story maps about 78 samples of apartment units in Bejing.</p>
+        <p>The following slides map out these apartment samples based on their unit type, unit price, floors and housing age.</p>
+        <p>Refer to the legends on the top-left corner to get a sense of the ditribution of different types of units.</p>
+        <p>You can also click the points on the maps to check out their detailed information on each slide!</p>
+        <p>Now Let's start to find your ideal apartment!</p>
+      </div>
+      <div id = "myDiscription1" class = "discription" style="display: none">
+        <p>Below shows the total numbers of units for different unit types.</p>
+        <table>
+          <tr><th>1 bedroom: </th><td>13 units</td></tr>
+          <tr><th>2 bedrooms: </th><td>38 units</td></tr>
+          <tr><th>3 bedrooms: </th><td>26 units</td></tr>
+          <tr><th>4+ bedrooms: </th><td>1 unit</td></tr>
+        </table>
+        <p>Two-bedroom apartment is the most common unit type.</p>
+        <p>Apartments with more than 2 bedrooms tend to be more concentrated around the northern part of the city.</p>
+      </div>
+      <div id = "myDiscription2" class = "discription" style="display: none">
+        <p>Below shows the total numbers of units for different ranges of price.</p>
+        <table>
+          <tr><th>Below ￥20,000/m2: </th><td>5 units</td></tr>
+          <tr><th>￥20,000/m2 to ￥40,000/m2: </th><td>43 units</td></tr>
+          <tr><th>￥40,000/m2 to ￥60,000/m2: </th><td>24 units</td></tr>
+          <tr><th>Above ￥60,000/m2: </th><td>6 units</td></tr>
+        </table>
+        <p>The median price range is between ￥20,000/m2 and ￥40,000/m2.</p>
+        <p>The housing price is higher in the northern part of the city between N 2th Ring Rd and N 5th Ring Rd, compared to the rest parts.</p>
+      </div>
+      <div id = "myDiscription3" class = "discription" style="display: none">
+        <p>Below shows the numbers of apartment buildings with different ranges of floors.</p>
+        <table>
+          <tr><th>Up to 6 Floors: </th><td>29 units</td></tr>
+          <tr><th>7 to 10 Floors: </th><td>5 units</td></tr>
+          <tr><th>11 to 20 Floors: </th><td>0 unit</td></tr>
+          <tr><th>20+ Floors: </th><td>44 units</td></tr>
+        </table>
+        <p>The floor levels of the sample buildigns are mainly concentrated in the upper and lower ends of ranges: up to 6 floors and 20+ floors.</p>
+        <p>Particularly, high-rise apartments are also mainly distributed in the northern part of the city.</p>
+      </div>
+      <div id = "myDiscription4" class = "discription" style="display: none">
+        <p>Below shows the numbers of apartment buidlings with different years of being built.</p>
+        <table>
+          <tr><th>Before 1990: </th><td>13 units</td></tr>
+          <tr><th>1990 to 2000: </th><td>25 units</td></tr>
+          <tr><th>2000 to 2010: </th><td>33 unit</td></tr>
+          <tr><th>After 2010: </th><td>7 units</td></tr>
+        </table>
+        <p>Most of these sample apartment buildings were built between 1990 and 2010.</p>
+        <p>More new developments occured in the northern part of the city.</p>
+      </div>
+      <div id = "myDiscription5" class = "discription" style="display: none">
+        <p>Let's take a closer look at the northwest corner between N 3th Ring Rd and N 5th Ring Rd!</p>
+        <p>This part of ciy is near to 2 high education institutions: Peking University, Tsinghua University;</p>
+        <p>3 regional parks: Summer Palace, Yuanmingyuan Park, and Olympic Forest Park;</p>
+        <p>and the top-notch high-tech industrial park: Zhongguancun.</p>
+        <p>Due to the proximity to prestigious institutions and green space,
+           there is a huge demand of housing units for big family households around this area,
+           which explains the nearby concentration of highly-priced,
+           high-rise new apartments with more than 3 bedrooms.</p>
+      </div>
+      <div id = "buttons">
+        <button id="button-previous" class = "buttons" style="display: none;">Previous</button>
+        <button id="button-next" class = "buttons">Next</button>
+      </div>
+      <!-- page number -->
+      <div id = "pageNumber">
+        1
+      </div>
+
+    </div>
+    <div id="map" style="position: absolute; right: 0; left: 350px; top: 0; bottom: 0; height: 100%"></div>
+
+    <!-- Legend -->
+    <div id = "legend1" class = "legend" style="display: none;">
+      <div class="legend-item">
+        <div id="bedroom1" class = "circle1"></div>
+        1 bedroom
+      </div>
+      <div class="legend-item">
+        <div id="bedrooms2" class = "circle1"></div>
+        2 bedroom
+      </div>
+      <div class="legend-item">
+        <div id="bedrooms3" class = "circle1"></div>
+        3 bedroom
+      </div>
+      <div class="legend-item">
+        <div id="bedrooms4" class = "circle1"></div>
+        4+ bedroom
+      </div>
+    </div>
+
+    <div id = "legend2" class = "legend" style="display: none;">
+      <div class="legend-item">
+        <div id="below20" class = "circle2"></div>
+        Below ￥20,000
+      </div>
+      <div class="legend-item">
+        <div id="between20and40" class = "circle2"></div>
+        ￥20,000 to ￥40,000
+      </div>
+      <div class="legend-item">
+        <div id="between40and60" class = "circle2"></div>
+        ￥40,000 to ￥60,000
+      </div>
+      <div class="legend-item">
+        <div id="above60" class = "circle2"></div>
+        Above ￥60,000
+      </div>
+    </div>
+
+    <div id = "legend3" class = "legend" style="display: none;">
+      <div class="legend-item">
+        <div id="upTo6" class = "circle2"></div>
+        up to 6 floor
+      </div>
+      <div class="legend-item">
+        <div id="between7and10" class = "circle2"></div>
+        7 to 10 floor
+      </div>
+      <div class="legend-item">
+        <div id="between11and20" class = "circle2"></div>
+        11 to 20 floor
+      </div>
+      <div class="legend-item">
+        <div id="above20" class = "circle2"></div>
+        20+ floor
+      </div>
+    </div>
+
+    <div id = "legend4" class = "legend" style="display: none;">
+      <div class="legend-item">
+        <div id="before1990" class = "circle2"></div>
+        before 1990
+      </div>
+      <div class="legend-item">
+        <div id="between90and00" class = "circle2"></div>
+        1990 to 2000
+      </div>
+      <div class="legend-item">
+        <div id="between00and10" class = "circle2"></div>
+        2000 to 2010
+      </div>
+      <div class="legend-item">
+        <div id="after10" class = "circle2"></div>
+        after 2010
+      </div>
+    </div>
+
+    <div id = "legend5" class = "legend" style="display: none;">
+      <div class="legend-item">
+        <div id="below20" class = "circle2"></div>
+        below ￥20000
+      </div>
+      <div class="legend-item">
+        <div id="between20and40" class = "circle2"></div>
+        ￥20000 to ￥40000
+      </div>
+      <div class="legend-item">
+        <div id="between40and60" class = "circle2"></div>
+        ￥40000 to ￥60000
+      </div>
+      <div class="legend-item">
+        <div id="above60" class = "circle2"></div>
+        above ￥60000
+      </div>
+
+      <div class="legend-item">
+        <div id="bedroom1" class = "circle1"></div>
+        1 bedroom
+      </div>
+      <div class="legend-item">
+        <div id="bedrooms2" class = "circle1"></div>
+        2 bedroom
+      </div>
+      <div class="legend-item">
+        <div id="bedrooms3" class = "circle1"></div>
+        3 bedroom
+      </div>
+      <div class="legend-item">
+        <div id="bedrooms4" class = "circle1"></div>
+        4+ bedroom
+      </div>
+    </div>
+    <!-- End HTML -->
+
+    <!-- Start Javascript Imports -->
+    <script src="import/jquery-2.2.0.js"></script>
+    <script src="import/underscore.js"></script>
+    <script src="import/leaflet.js"></script>
+    <script src="import/leaflet.markercluster-src.js"></script>
+    <script src="slideModel.js"></script>
+    <script src="midtermFunctions.js"></script>
+    <script src="basicApplication.js"></script>
+    <!-- End Javascript Imports -->
+
+  </body>
+</html>
